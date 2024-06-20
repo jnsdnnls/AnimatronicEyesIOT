@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-grey">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Animatronic Eye | by Jens Danneels</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='dist/css/output.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static',filename='static/styles/style.css')}}" />
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto Mono" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  </head>
+  <body>
+    {% include 'header.html' %}
+    <main>
+      <div class="max-w-screen-xl mx-auto mt-28 mb-64">
+        <h1 class="uppercase text-center text-4xl font-bold">3D-Printed animatronic eye's</h1>
+        <p class="text-center text-dark_grey mt-14">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam egestas velit eget tellus sodales, at interdum dui
+          eleifend. Donec leo ipsum, dignissim quis eros et, egestas commodo neque. Pellentesque imperdiet ante quis
+          rutrum hendrerit. Sed tincidunt nec leo a aliquet. Interdum et malesuada fames ac ante ipsum primis in faucibus.
+          Aliquam cursus metus at elit laoreet, et auctor neque efficitur. Sed lacus nibh, vestibulum ut euismod id,
+          faucibus ultricies metus. Sed non vehicula felis, in sollicitudin quam. Cras porta tristique lacus. Proin id
+          orci aliquet, luctus ipsum at, aliquam ligula. Integer feugiat tincidunt porttitor. Integer vitae diam ut felis
+          scelerisque fermentum. Nunc gravida ultricies ipsum vitae gravida.
+        </p>
+        <div class="flex mt-24 gap-5">
+          <div class="flex flex-col justify-between bg-white p-8 rounded-tl-[50px] rounded-br-[50px] w-full">
+            <figure class="flex justify-center pt-12 mb-20">
+              <img class="w-40" src="/static/images/motherboard.png" alt="motherboard icon" title="motherboard icon" />
+            </figure>
+            <div>
+              <h3 class="uppercase font-bold">What components where used?</h3>
+              <p class="text-dark_grey mt-1">Discover the parts that make up your animatronic eyes.</p>
+              <a href="/components"><button class="uppercase text-primary mt-7 py-3 px-6 border rounded-full w-full">Learn More!</button></a>
+            </div>
+          </div>
+          <div class="flex flex-col justify-between bg-white p-8 rounded-b-[50px] w-full">
+            <figure class="flex justify-center pt-12 mb-20">
+              <img class="w-40" src="/static/images/controller.png" alt="controller icon" title="controller icon" />
+            </figure>
+            <div>
+              <h3 class="uppercase font-bold">How does it work??</h3>
+              <p class="text-dark_grey mt-1">Understand the functionality behind the animatronic eyes.</p>
+              <a href="/how-it-works"><button class="uppercase text-primary mt-7 py-3 px-6 border rounded-full w-full">Find out!</button></a>
+            </div>
+          </div>
+          <div class="flex flex-col justify-between bg-white p-8 rounded-tr-[50px] rounded-bl-[50px] w-full">
+            <figure class="flex justify-center pt-12 mb-20">
+              <img class="w-40" src="/static/images/guide.png" alt="getting started icon" title="getting started icon" />
+            </figure>
+            <div>
+              <h3 class="uppercase font-bold">Getting Started</h3>
+              <p class="text-dark_grey mt-1">Learn how to set up and control your animatronic eyes with ease.</p>
+              <a href="/getting-started"><button class="uppercase text-primary mt-7 py-3 px-6 border rounded-full w-full">start now!</button></a>
+            </div>
+          </div>
+      </div>
+    </main>
+    {% include 'footer.html' %}
+  </body>
+</html>

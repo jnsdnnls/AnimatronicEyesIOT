@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-grey">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='dist/css/output.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static', filename='static/styles/style.css')}}" />
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css"
+      integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    {% include 'header.html' %}
+    <main>
+      <div class="max-w-screen-xl mx-auto mt-28 mb-112">
+        <h1 class="uppercase text-center text-4xl font-bold">Data collected from ESP32</h1>
+        <div class="grid grid-cols-2 gap-6 mt-14">
+          <!-- Joystick X -->
+          <div class="bg-white p-8 rounded">
+            <h2 class="text-xl font-bold mb-2">Joystick X</h2>
+            <div class="flex justify-between mt-2">
+              <span>Value:</span>
+              <span id="joystick-x-value"></span>
+            </div>
+          </div>
+          <!-- Joystick Y -->
+          <div class="bg-white p-8 rounded">
+            <h2 class="text-xl font-bold mb-2">Joystick Y</h2>
+            <div class="flex justify-between mt-2">
+              <span>Value:</span>
+              <span id="joystick-y-value"></span>
+            </div>
+          </div>
+          <!-- Potentiometer -->
+          <div class="bg-white p-8 rounded">
+            <h2 class="text-xl font-bold mb-2">Potentiometer</h2>
+            <div class="flex justify-between mt-2">
+              <span>Value:</span>
+              <span id="potentio-value"></span>
+            </div>
+          </div>
+          <!-- Joystick Button -->
+          <div class="bg-white p-8 rounded">
+            <h2 class="text-xl font-bold mb-2">Joystick Button</h2>
+            <div class="flex justify-between mt-2">
+              <span>Value:</span>
+              <span id="switch-value"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    {% include 'footer.html' %}
+    <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+    <script>
+      const host = window.location.hostname;
+      const port = 9001;
+      const client = mqtt.connect(`ws://${host}:${port}`);
+
+      const topics = {
+        "eye_mechanism/xval": "joystick-x-value",
+        "eye_mechanism/yval": "joystick-y-value",
+        "eye_mechanism/potval": "potentio-value",
+        "eye_mechanism/switchval": "switch-value",
+      };
+
+      client.on("connect", () => {
+        for (const topic in topics) {
+          client.subscribe(topic, (err) => {
+            if (err) {
+              console.error(`Failed to subscribe to ${topic}: ${err}`);
+            }
+          });
+        }
+      });
+
+      client.on("message", (topic, message) => {
+        const msg = message.toString();
+        const elementId = topics[topic];
+        if (elementId) {
+          document.getElementById(elementId).textContent = msg;
+        } else {
+          console.log(`No handler for topic ${topic}`);
+        }
+      });
+    </script>
+  </body>
+</html>

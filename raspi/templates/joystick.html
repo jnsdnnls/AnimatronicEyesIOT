@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mousebot</title>
+    <meta name="viewport" content="user-scalable=no" />
+    <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto Mono" rel="stylesheet" />
+    <style>
+      .center {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        flex-direction: column;
+      }
+
+      #winkButton {
+        position: fixed;
+        text-align: center;
+        padding: 20px 60px;
+        border-radius: 50px;
+        outline: 1px solid #101214;
+        color: #fe6f3a;
+        font-family: "Roboto Mono";
+        font-weight: bold;
+        font-size: 20px;
+      }
+
+      #eyeLidSlider {
+        -webkit-appearance: none;
+        width: 100%;
+        max-width: 800px;
+        height: 60px;
+        border-radius: 500px;
+        background: #fe6f3a;
+        outline: 3px solid #101214;
+        transition: opacity 0.15s ease-in-out;
+      }
+
+      @media (max-width: 1200px) {
+        #eyeLidSlider {
+          max-width: 1000px;
+          height: 100px;
+        }
+
+        #winkButton {
+          width: 100%;
+          background-color: white;
+          margin-top: 20px;
+          height: 100px;
+          font-size: 200px;
+        }
+
+        #eyeLidSlider::-webkit-slider-thumb {
+          width: 600px;
+          height: 600px;
+        }
+
+        #eyeLidSlider::-moz-range-thumb {
+          width: 600px;
+          height: 600px;
+        }
+      }
+
+      #eyeLidSlider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: #101214;
+        cursor: pointer;
+      }
+
+      #eyeLidSlider::-moz-range-thumb {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: #101214;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <main
+      style="
+        position: fixed;
+        font-family: 'Roboto Mono', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        color: rgb(128, 128, 128);
+        font-size: xx-large;
+        -webkit-text-size-adjust: 100%;
+      "
+    >
+      <h1 style="text-align: center">EYE MECHANISM CONTROLLER</h1>
+      <p style="text-align: center">X: <span id="x_coordinate"> </span> Y: <span id="y_coordinate"> </span></p>
+      <div class="center" style="margin-bottom: 20px">
+        <label
+          for="eyeLidSlider"
+          style="
+            margin-right: 10px;
+            margin-bottom: 20px;
+            font-family: 'Roboto Mono';
+            font-weight: bold;
+            font-size: 20px;
+            color: #fe6f3a;
+          "
+          >Eye Lid Openness:</label
+        >
+        <input type="range" id="eyeLidSlider" name="eyeLidSlider" min="0" max="1023" value="511" />
+      </div>
+      <!-- Wink Button -->
+      <div style="display: flex; width: 100%; justify-content: center">
+        <button
+          style="
+            position: fixed;
+            text-align: center;
+            padding: 20px 60px;
+            border-radius: 50px;
+            outline: 1px solid #101214;
+            color: #fe6f3a;
+            font-family: 'Roboto Mono';
+            font-weight: bold;
+            font-size: 20px;
+          "
+          id="winkButton"
+        >
+          Wink
+        </button>
+      </div>
+      <canvas id="canvas" name="game"></canvas>
+
+      <script>
+        const mqttServer = "ws://10.3.141.1:9001";
+        const clientId = "web_client_" + Math.random().toString(16).substr(2, 8);
+        const topic = "joystick/data";
+
+        const client = mqtt.connect(mqttServer, {
+          clientId: clientId,
+        });
+
+        client.on("connect", () => {
+          console.log("Connected to MQTT broker");
+        });
+
+        client.on("error", (err) => {
+          console.error("Connection failed: ", err);
+        });
+
+        let lastSentTime = 0;
+        const sendInterval = 100;
+
+        function send(x, y, eyeLids, switchVal) {
+          const currentTime = Date.now();
+          if (currentTime - lastSentTime >= sendInterval) {
+            var data = { x: x, y: y, eyeLids: eyeLids, switch: switchVal };
+            data = JSON.stringify(data);
+            client.publish(topic, data);
+            lastSentTime = currentTime;
+          }
+        }
+
+        // Debounce function to prevent rapid successive clicks
+        function debounce(func, wait) {
+          let timeout;
+          return function (...args) {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => func.apply(this, args), wait);
+          };
+        }
+
+        // Function to handle wink action
+        function sendWink(state) {
+          // state: 0 when pressed, 1 when released
+          send(0, 0, 50, state); // Send switch value as state (0 or 1)
+        }
+
+        // Attach debounced event handlers to the wink button
+        const debouncedSendWinkPress = debounce(() => sendWink(1), 100);
+        const debouncedSendWinkRelease = debounce(() => sendWink(0), 100);
+
+        const winkButton = document.getElementById("winkButton");
+        winkButton.onmousedown = debouncedSendWinkPress;
+        winkButton.onmouseup = debouncedSendWinkRelease;
+        winkButton.ontouchstart = debouncedSendWinkPress;
+        winkButton.ontouchend = debouncedSendWinkRelease;
+
+        // Event listeners for the spacebar
+        window.addEventListener("keydown", function (event) {
+          if (event.code === "Space") {
+            debouncedSendWinkPress();
+          }
+        });
+
+        window.addEventListener("keyup", function (event) {
+          if (event.code === "Space") {
+            debouncedSendWinkRelease();
+          }
+        });
+
+        var canvas, ctx;
+
+        window.addEventListener("load", () => {
+          canvas = document.getElementById("canvas");
+          ctx = canvas.getContext("2d");
+          resize();
+
+          document.addEventListener("mousedown", startDrawing);
+          document.addEventListener("mouseup", stopDrawing);
+          document.addEventListener("mousemove", Draw);
+
+          document.addEventListener("touchstart", startDrawing);
+          document.addEventListener("touchend", stopDrawing);
+          document.addEventListener("touchcancel", stopDrawing);
+          document.addEventListener("touchmove", Draw);
+          window.addEventListener("resize", resize);
+
+          document.getElementById("x_coordinate").innerText = 0;
+          document.getElementById("y_coordinate").innerText = 0;
+        });
+
+        var width, height, radius, x_orig, y_orig;
+        function resize() {
+          width = window.innerWidth;
+          radius = 200;
+          height = radius * 6.5;
+          ctx.canvas.width = width;
+          ctx.canvas.height = height;
+          background();
+          joystick(width / 2, height / 3);
+        }
+
+        function background() {
+          x_orig = width / 2;
+          y_orig = height / 3;
+
+          ctx.beginPath();
+          ctx.arc(x_orig, y_orig, radius + 20, 0, Math.PI * 2, true);
+          ctx.fillStyle = "#101214";
+          ctx.fill();
+        }
+
+        function joystick(width, height) {
+          ctx.beginPath();
+          ctx.arc(width, height, radius - 80, 0, Math.PI * 2, true);
+          ctx.fillStyle = "#fe6f3a";
+          ctx.fill();
+          ctx.strokeStyle = "#F2F4F5";
+          ctx.lineWidth = 8;
+          ctx.stroke();
+        }
+
+        let coord = { x: 0, y: 0 }; // Initialize coord with x=0, y=0
+        let paint = false;
+
+        function getPosition(event) {
+          var mouse_x = event.clientX || event.touches[0].clientX;
+          var mouse_y = event.clientY || event.touches[0].clientY;
+          coord.x = mouse_x - canvas.offsetLeft;
+          coord.y = mouse_y - canvas.offsetTop;
+        }
+
+        function is_it_in_the_circle() {
+          var current_radius = Math.sqrt(Math.pow(coord.x - x_orig, 2) + Math.pow(coord.y - y_orig, 2));
+          return radius >= current_radius;
+        }
+
+        function startDrawing(event) {
+          paint = true;
+          getPosition(event);
+          if (is_it_in_the_circle()) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            background();
+            joystick(coord.x, coord.y);
+            Draw();
+          }
+        }
+
+        function stopDrawing() {
+          paint = false;
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          background();
+          joystick(width / 2, height / 3);
+          document.getElementById("x_coordinate").innerText = 0;
+          document.getElementById("y_coordinate").innerText = 0;
+          send(0, 0, document.getElementById("eyeLidSlider").value, 0); // Send final position when joystick returns to center
+        }
+
+        function Draw(event) {
+          if (paint) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            background();
+
+            var eyeLidOpenness = document.getElementById("eyeLidSlider").value;
+
+            if (is_it_in_the_circle()) {
+              joystick(coord.x, coord.y);
+              x = coord.x;
+              y = coord.y;
+            } else {
+              joystick(x, y);
+            }
+
+            getPosition(event);
+
+            var x_relative = Math.round(x - x_orig);
+            var y_relative = Math.round(y_orig - y); // Flip the Y value
+
+            document.getElementById("x_coordinate").innerText = x_relative;
+            document.getElementById("y_coordinate").innerText = y_relative;
+
+            send(x_relative, y_relative, eyeLidOpenness, 0); // Send switch value as 0 during normal joystick movement
+          }
+        }
+      </script>
+    </main>
+  </body>
+</html>

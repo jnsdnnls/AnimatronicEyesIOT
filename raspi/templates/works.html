@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-grey">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>How It Works | Animatronic Eye</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='dist/css/output.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static',filename='static/styles/style.css')}}" />
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto Mono" rel="stylesheet" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css"
+      integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    {% include 'header.html' %}
+    <main>
+      <div class="max-w-screen-xl mx-auto mt-28 mb-64">
+        <h1 class="uppercase text-center text-4xl font-bold">HOW DoES IT WORK?</h1>
+        <p class="text-center text-dark_grey mt-14 uppercase">
+          This section provides an overview of how the animatronic eyes system operates. By understanding the
+          interactions between the various components and the control logic, you can gain insight into the engineering
+          behind the lifelike movements of the eyes.
+        </p>
+        <div class="flex mt-24 gap-10 flex-col">
+          <div>
+            <h2 class="uppercase text-4xl font-bold mb-6">System overview</h2>
+            <div class="flex items-center gap-10">
+              <p class="text-dark_grey w-3/4 uppercase">
+                The animatronic eyes system is a sophisticated assembly of electronic components designed to mimic
+                natural eye movements. At its core, the system uses an ESP32 microcontroller to coordinate the actions
+                of servo motors and other peripherals. Wireless communication allows for remote control, making the
+                system both flexible and user-friendly.
+              </p>
+              <figure class="w-1/4 mt-10"><img class="w-2/3" src="/static/images/arrow-right.png" alt="" /></figure>
+            </div>
+          </div>
+          <div>
+            <h2 class="text-right uppercase text-4xl font-bold mb-6">Control and Communication</h2>
+            <div class="flex items-center gap-10">
+              <figure class="w-1/4 mt-10">
+                <img class="w-2/3 ml-auto" src="/static/images/arrow-left.png" alt="" />
+              </figure>
+              <p class="text-right text-dark_grey w-3/4 uppercase">
+                The ESP32 microcontroller serves as the brain of the system, processing inputs from the joystick and
+                potentiometer to generate precise control signals. The PCA9685 PWM driver extends the microcontroller’s
+                capabilities, allowing it to control multiple servos for synchronized eye and eyelid movements. Wi-Fi
+                and Bluetooth connectivity enable wireless operation and integration with other devices.
+              </p>
+            </div>
+          </div>
+          <div>
+            <h2 class="uppercase text-4xl font-bold mb-6">Power Management</h2>
+            <div class="flex items-center gap-10">
+              <p class="text-dark_grey w-3/4 uppercase">
+                Reliable power is crucial for the animatronic eyes. The Li-Ion 18650 battery provides a steady power
+                supply, while the USB-C TP4056 charging module ensures safe and efficient recharging. The system is
+                designed to maximize battery life, allowing for prolonged use without frequent recharging.
+              </p>
+              <figure class="w-1/4 mt-10"><img class="w-2/3" src="/static/images/arrow-right.png" alt="" /></figure>
+            </div>
+          </div>
+          <div>
+            <h2 class="text-right uppercase text-4xl font-bold mb-6">Movement Mechanisms</h2>
+            <div class="flex items-center gap-10">
+              <figure class="w-1/4 mt-10">
+                <img class="w-2/3 ml-auto" src="/static/images/arrow-left.png" alt="" />
+              </figure>
+              <p class="text-right text-dark_grey w-3/4 uppercase">
+                The precise and smooth motion of the animatronic eyes is achieved through the use of 9G micro servo
+                motors. These servos are controlled by the PCA9685 driver, which receives signals from the ESP32. The
+                servos adjust the position of the eyes and eyelids in real time, based on user input and pre-programmed
+                sequences.
+              </p>
+            </div>
+          </div>
+          <div>
+            <h2 class="uppercase text-4xl font-bold mb-6">User Interaction</h2>
+            <div class="flex items-center gap-10">
+              <p class="text-dark_grey w-3/4 uppercase">
+                The XY analog joystick and 10kOhm potentiometer provide intuitive control over the animatronic eyes. The
+                joystick allows for easy adjustment of eye direction, while the potentiometer fine-tunes the eyelid
+                movements. This setup enables users to create lifelike expressions and movements effortlessly.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    {% include 'footer.html' %}
+  </body>
+</html>

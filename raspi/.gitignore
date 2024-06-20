@@ -1,0 +1,20 @@
+# Ignore venv
+venv/
+
+# Ignore compiled Python files
+*.pyc
+__pycache__/
+
+# Ignore local development settings
+.env
+
+# Ignore editor and IDE files
+.vscode/
+.idea/
+
+# Ignore system and temporary files
+.DS_Store
+Thumbs.db
+*.swp
+
+wifiSecret.h

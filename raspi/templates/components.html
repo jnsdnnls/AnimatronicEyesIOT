@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-grey">
+  <head>
+    {% include 'defaultImports.html' %}
+    <title>Components | Animatronic Eye</title>
+  </head>
+  <body>
+    {% include 'header.html' %}
+    <main>
+      <div class="max-w-screen-xl mx-auto mt-28 mb-64">
+        <h1 class="uppercase text-center text-4xl font-bold">WHAT COMPONENTS WHERE USED?</h1>
+        <p class="text-center text-dark_grey mt-14">
+          Creating animatronic eyes involves integrating various electronic components, each serving a specific purpose
+          to bring lifelike motion and functionality. Below is a detailed overview of the key components used in this
+          project, along with their roles and importance. By understanding the function of each part, you can gain
+          insight into the intricate design and engineering behind animatronic technology.
+        </p>
+        <div class="mt-24 flex flex-col gap-5">
+          <div class="flex items-center gap-5">
+            <figure class="p-5 bg-white w-72 h-72 shrink-0 flex items-center rounded-tl-[50px] rounded-br-[50px]">
+              <img class="w-full" src="/static/images/esp32.jpg" alt="esp32" title="esp32" />
+            </figure>
+            <div>
+              <h2 class="uppercase text-4xl font-bold mb-6">ESP32 WROOM-32</h2>
+              <p class="text-dark_grey w-10/12">
+                The ESP32 WROOM-32 is a powerful microcontroller with integrated Wi-Fi and Bluetooth capabilities. It's
+                used as the main control unit for the animatronic eyes, enabling wireless communication and control. Its
+                high processing power and versatility make it ideal for handling the complex operations required for
+                animatronics.
+              </p>
+            </div>
+          </div>
+          <div class="flex items-center gap-5">
+            <div class="text-right">
+              <h2 class="uppercase text-4xl font-bold mb-6">9G Micro Servo</h2>
+              <p class="text-dark_grey w-10/12 ml-auto">
+                The 9G micro servo motors are essential for the movement of the animatronic eyes. These small yet
+                powerful servos enable precise and smooth motion, ensuring the eyes can move accurately in various
+                directions as programmed or controlled by the joystick.
+              </p>
+            </div>
+            <figure class="p-5 bg-white w-72 h-72 shrink-0 flex items-center rounded-tr-[50px] rounded-bl-[50px]">
+              <img class="w-full" src="/static/images/servo.jpg" alt="servo" title="servo" />
+            </figure>
+          </div>
+          <div class="flex items-center gap-5">
+            <figure class="p-5 bg-white w-72 h-72 shrink-0 flex items-center rounded-tl-[50px] rounded-br-[50px]">
+              <img class="w-full" src="/static/images/pca9685.jpg" alt="pca9685" title="pca9685" />
+            </figure>
+            <div>
+              <h2 class="uppercase text-4xl font-bold mb-6">PCA9685</h2>
+              <p class="text-dark_grey w-10/12">
+                The PCA9685 is a PWM (Pulse Width Modulation) driver that allows for the control of multiple servo
+                motors simultaneously. It is used to manage the movements of the animatronic eyes and eyelids by
+                providing precise control signals to the servos, enabling smooth and coordinated actions.
+              </p>
+            </div>
+          </div>
+          <div class="flex items-center gap-5">
+            <div class="text-right">
+              <h2 class="uppercase text-4xl font-bold mb-6">Raspberry PI</h2>
+              <p class="text-dark_grey w-10/12 ml-auto">
+                The raspberry PI is essential for handling the complex operations required for animatronics. It is used
+                as the main network using RaspAP and MQTT to control the animatronic eyes. It is also used to host the
+                web server that serves the web interface for controlling the animatronic eyes.
+              </p>
+            </div>
+            <figure class="p-5 bg-white w-72 h-72 shrink-0 flex items-center rounded-tr-[50px] rounded-bl-[50px]">
+              <img class="w-full" src="/static/images/raspi.png" alt="raspi" title="raspi" />
+            </figure>
+          </div>
+        </div>
+      </div>
+    </main>
+    {% include 'footer.html' %}
+  </body>
+</html>

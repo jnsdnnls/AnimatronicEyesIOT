@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-grey">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Getting Started | Animatronic Eye</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='dist/css/output.css')}}" />
+    <link rel="stylesheet" href="{{url_for('static',filename='static/styles/style.css')}}" />
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto Mono" rel="stylesheet" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css"
+      integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    {% include 'header.html' %}
+    <main>
+      <div class="max-w-screen-xl mx-auto mt-28 mb-64">
+        <h1 class="uppercase text-center text-4xl font-bold">GETTING STARTED</h1>
+        <p class="text-center text-dark_grey mt-14">
+          Welcome to the animatronic eyes project! This guide will help you get started with setting up and using your
+          animatronic eyes. Follow the steps below to assemble the components, configure the system, and begin
+          controlling your animatronic eyes.
+        </p>
+        <div class="flex mt-24 gap-5 flex-col gap-40">
+          <div class="w-3/4 mx-auto">
+            <h2 class="uppercase text-center text-4xl font-bold mb-8">STEP 1: Printing</h2>
+            <div class="grid grid-rows-2 grid-cols-4 gap-0 gap-5 mb-8 h-128">
+              <div class="bg-[#DFC57C] row-span-2 col-span-3 overflow-hidden flex justify-center items-center">
+                <img class="w-full" src="static/images/step1_print_3.png" alt="" />
+              </div>
+              <div class="bg-[#86759A] row-start-1 col-start-4 overflow-hidden flex justify-center items-center">
+                <img class="w-full" src="static/images/step1_print_2.jpg" alt="" />
+              </div>
+              <div class="bg-[#E65779] row-start-2 col-start-4 overflow-hidden flex justify-center items-center">
+                <img class="w-full" src="static/images/step1_print_1.jpg" alt="" />
+              </div>
+            </div>
+            <div class="text-dark_grey uppercase mb-10">
+              <p class="mb-2">
+                Begin by printing all the necessary 3D components for the animatronic eyes. Ensure you have the
+                following parts:
+              </p>
+              <ul class="list-disc list-inside [&>li]:mb-2">
+                <li>Eye Mechanism</li>
+                <li>Eye Mechanism</li>
+                <li>Eye Mechanism</li>
+                <li>Eye Mechanism</li>
+              </ul>
+            </div>
+            <div class="text-dark_grey uppercase">
+              <p class="mb-2">Instructions:</p>
+              <ul class="list-disc list-inside [&>li]:mb-2">
+                <li>Use high-quality filament to ensure durability.</li>
+                <li>
+                  Print each component with a layer height of 0.2mm, which is more than precise enough for this model.
+                </li>
+                <li>
+                  Use PLA for all parts except for the eyes, which are printed in ABS for a more natural appearance.
+                </li>
+                <li>Verify the dimensions and quality of each printed part.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="w-3/4 mx-auto">
+            <h2 class="uppercase text-center text-4xl font-bold mb-8">STEP 2: Post-Processing</h2>
+            <div class="grid grid-rows-2 grid-cols-4 gap-0 gap-5 mb-8 h-128">
+              <div class="bg-[#DFC57C] row-span-2 col-span-3 overflow-hidden flex justify-center items-center">
+                <img class="w-full" src="static/images/step1_print_3.png" alt="" />
+              </div>
+              <div class="bg-[#86759A] row-start-1 col-start-4 overflow-hidden flex justify-center items-center">
+                <img class="w-full" src="static/images/step1_print_2.jpg" alt="" />
+              </div>
+              <div class="bg-[#E65779] row-start-2 col-start-4 overflow-hidden flex justify-center items-center">
+                <img class="w-full" src="static/images/step1_print_1.jpg" alt="" />
+              </div>
+            </div>
+            <div class="text-dark_grey uppercase mb-10">
+              <p class="mb-2">
+                After printing the components, you need to perform post-processing to ensure they fit and function
+                correctly.
+              </p>
+            </div>
+            <div class="text-dark_grey uppercase">
+              <p class="mb-2">Instructions:</p>
+              <ul class="list-disc list-inside [&>li]:mb-2">
+                <li>
+                  The eyes can be sanded and smoothed as much as you like, but a minimum of sanding may be necessary.
+                </li>
+                <li>
+                  Some holes are designed to be undersized for direct screwing, while others are oversized for a snug
+                  fit. If your printer makes holes too small to screw into or rotate smoothly, use a hand drill to drill
+                  out the holes for better precision.
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="w-3/4 mx-auto">
+            <h2 class="uppercase text-center text-4xl font-bold mb-8">STEP 3: Assembly</h2>
+            <div class="grid grid-rows-2 grid-cols-4 gap-0 gap-5 mb-8 h-128">
+              <div class="bg-[#DFC57C] row-span-2 col-span-3 overflow-hidden flex justify-center items-center">
+                <img class="w-full" src="static/images/step3_1.jpg" alt="" />
+              </div>
+              <div class="bg-[#86759A] row-start-1 col-start-4 overflow-hidden flex justify-center items-center">
+                <img class="w-full" src="static/images/step3_2.jpg" alt="" />
+              </div>
+              <div class="bg-[#E65779] row-start-2 col-start-4 overflow-hidden flex justify-center items-center">
+                <img class="w-full" src="static/images/step3_3.jpg" alt="" />
+              </div>
+            </div>
+            <div class="text-dark_grey uppercase mb-10">
+              <p class="mb-2">
+                After printing the components, you need to perform post-processing to ensure they fit and function
+                correctly.
+              </p>
+            </div>
+            <div class="text-dark_grey uppercase">
+              <p class="mb-2">Instructions:</p>
+              <ul class="list-disc list-inside [&>li]:mb-2">
+                <li>
+                  Connect the two bases with 10mm/12mm M3 bolts. This pivot point is for the y-axis of the eye motion
+                  and the eyelids.
+                </li>
+                <li>
+                  Place the servo in position and screw it in with some 4 or 6mm M2 screws. This serves as the actuator
+                  for the x-axis motion.
+                </li>
+                <li>
+                  Attach the y-axis arm to the sub-base with a 4/5/6mm M3 screw, and attach a servo horn on the third
+                  hole from the center using a 4mm or 6mm M2 screw.
+                </li>
+                <li>
+                  Start building the x-axis assembly by screwing the forks into the eye-adaptors with 4/5/6mm M3 bolts.
+                  The fork holes should be oversized so the screws bite into the adaptor; one goes in on a funny angle
+                  but you should be able to get it in.
+                </li>
+                <li>
+                  Attach the three-point connector to the top of the forks; the M3 screw will bite into the undersized
+                  hole in the fork component. Also attach a servo arm on the final hole to the center of the three-point
+                  connector using a 5mm M3 bolt. The hole on the servo arm will likely need to be drilled to 2.5mm -
+                  2.8mm to accept the screw. Manipulate the assembly regularly to ensure it all moves okay without
+                  friction as you build it up.
+                </li>
+                <li>
+                  Attach the eye center-link to the eye adaptors with an 8mm M3 screw. Make sure the flat surface of the
+                  center-link is facing up and the sloping section facing down. You can also plug in the eyes at this
+                  stage.
+                </li>
+                <li>Screw all this to the center of the sub-base with two 8/12mm M3 bolts.</li>
+                <li>Load up the servo block with 5 9G servos, in the correct orientation shown.</li>
+                <li>
+                  Work out which eyelid is which using the graphic, and connect the relevant connector with a 4mm or 6mm
+                  M2 screw. Attach a servo arm to the other end.
+                </li>
+                <li>Attach the eyelids to the base, but don't worry about connecting any servo horns yet.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="w-3/4 mx-auto">
+            <h2 class="uppercase text-center text-4xl font-bold mb-8">STEP 4: Wiring & Final Assembly</h2>
+            <div class="grid grid-rows-2 grid-cols-4 gap-0 gap-5 mb-8 h-128">
+              <div class="bg-[#DFC57C] row-span-2 col-span-3 overflow-hidden">
+                <img class="w-full" src="static/images/step1_print_3.png" alt="" />
+              </div>
+              <div class="bg-[#86759A] row-start-1 col-start-4 overflow-hidden">
+                <img class="w-full" src="static/images/step1_print_2.jpg" alt="" />
+              </div>
+              <div class="bg-[#E65779] row-start-2 col-start-4 overflow-hidden">
+                <img class="w-full" src="static/images/step1_print_1.jpg" alt="" />
+              </div>
+            </div>
+            <div class="text-dark_grey uppercase mb-10">
+              <p class="mb-2">
+                Now, upload the code to the Arduino and wire everything up. Ensure all servos are powered and in their
+                neutral position, then link up all the servo arms to the servos with the eyes facing straight forward in
+                a neutral position.
+              </p>
+            </div>
+            <div class="text-dark_grey uppercase">
+              <p class="mb-2">And all should be done!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    {% include 'footer.html' %}
+  </body>
+</html>
